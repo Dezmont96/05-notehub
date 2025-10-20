@@ -16,16 +16,14 @@ apiClient.interceptors.request.use(config => {
 
 export interface FetchNotesParams {
   page?: number;
-  query?: string;
+  search?: string;
   perPage?: number;
 }
 
+
 export interface FetchNotesResponse {
   notes: Note[];
-  totalDocs: number;
   totalPages: number;
-  page: number;
-  limit: number;
 }
 
 export interface CreateNotePayload {
@@ -40,7 +38,7 @@ export const fetchNotes = async (
   const response: AxiosResponse<FetchNotesResponse> = await apiClient.get('/notes', {
     params: {
       page: params.page || 1,
-      search: params.query || '',
+      search: params.search || '',
       perPage: params.perPage || 12,
     },
   });

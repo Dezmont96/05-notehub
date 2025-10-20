@@ -3,10 +3,11 @@ import css from './Pagination.module.css';
 
 interface PaginationProps {
   pageCount: number;
+  currentPage: number; // Додаємо проп для поточної сторінки
   onPageChange: (selectedItem: { selected: number }) => void;
 }
 
-const Pagination: React.FC<PaginationProps> = ({ pageCount, onPageChange }) => {
+const Pagination: React.FC<PaginationProps> = ({ pageCount, currentPage, onPageChange }) => {
   return (
     <ReactPaginate
       breakLabel="..."
@@ -15,6 +16,8 @@ const Pagination: React.FC<PaginationProps> = ({ pageCount, onPageChange }) => {
       pageRangeDisplayed={3}
       pageCount={pageCount}
       previousLabel="<"
+      // Передаємо активну сторінку. react-paginate 0-індексований, тому -1.
+      forcePage={currentPage - 1}
       renderOnZeroPageCount={null}
       containerClassName={css.pagination}
       pageLinkClassName={css.pageLink}
